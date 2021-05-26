@@ -1,0 +1,51 @@
+class Solution
+{
+   Node start=null,end=null;
+    public static void removeLoop(Node head)
+    {
+        // code here
+        // remove the loop without losing any nodes
+        Node slow=head;
+        Node fast=head;
+        int flag=0;
+        while(fast!=null && fast.next!=null)
+        {
+            fast=fast.next.next;
+            slow=slow.next;
+            if(fast==slow)
+            {
+                flag=1;
+                break;
+            }
+        }
+        if(flag==0)
+        return;
+       slow=slow.next;
+       int count=1;
+       while(slow!=fast)
+       {
+           count++;
+           slow=slow.next;
+       }
+       Node ptr1=head;
+       Node ptr2=head;
+       for(int i=1;i<=count;i++)
+       {
+           ptr2=ptr2.next;
+       }
+       
+       while(ptr1!=ptr2)
+       {
+           ptr1=ptr1.next;
+           ptr2=ptr2.next;
+           
+       }
+       
+       Node last=ptr1.next;
+       while(last.next!=ptr1)
+       {
+           last=last.next;
+       }
+        last.next=null;
+    }
+}
