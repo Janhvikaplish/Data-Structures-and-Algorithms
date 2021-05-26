@@ -1,0 +1,50 @@
+class Solution{
+	public static String infixToPostfix(String exp) {
+		// Your code here
+	Stack<Character> s=new Stack<Character>();
+		char a[]=exp.toCharArray();
+		String ans="";
+		for(int i=0;i<a.length;i++)
+		{
+		    if(Character.isLetterOrDigit(a[i]))
+		    ans=ans+a[i];
+		    else if(a[i]=='(')
+		    s.push(a[i]);
+		    else if(a[i]==')')
+		    {
+		        while(!s.isEmpty() && s.peek()!='(')
+		        ans=ans+s.pop();
+		        s.pop();//for popping '('
+		    }
+		    else
+		    {
+		        while(!s.isEmpty() && (precedence(s.peek())>=precedence(a[i])))
+		        ans=ans+s.pop();
+		        s.push(a[i]);
+		    }
+		    
+		}
+		while(!s.isEmpty())
+		{
+		    ans=ans+s.pop();
+		}
+		return ans;
+	} 
+	static int precedence(char ch)
+	{
+	    switch(ch)
+	    {
+	       case '+':
+	       case '-':
+	       return 1;
+	       case '*':
+	       case '/':
+	       case '%':
+	       return 2;
+	       case '^':
+	       return 3;
+	                               
+	    }
+	    return -1;
+	}
+}
