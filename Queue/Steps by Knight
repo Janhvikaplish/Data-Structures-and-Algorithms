@@ -1,0 +1,60 @@
+public class Cell
+{
+    int x,y;
+ public Cell(int x,int y)
+    {
+        this.x=x;
+        this.y=y;
+    }
+}
+class Solution
+{
+    public int minStepToReachTarget(int knightpos[], int targetpos[], int N)
+    {
+        // Code here
+        
+        if(knightpos[0]==targetpos[0] && knightpos[1]==targetpos[1])
+        return 0;
+        //bfs
+        int dx[] = {-2, -1, 1, 2, -2, -1, 1, 2};
+        int dy[] = {-1, -2, -2, -1, 1, 2, 2, 1};
+        
+        Queue<Cell> q=new LinkedList<Cell>();
+        
+        q.add(new Cell(knightpos[0],knightpos[1]));
+        int visited[][]=new int[N+1][N+1];
+        
+        for (int[] row : visited) Arrays.fill(row, 0);
+        visited[knightpos[0]][knightpos[1]]=1;
+        //Loop until no cell is left visited
+        while(!q.isEmpty())
+        {
+            Cell cell=q.poll();
+            for(int x=0;x<8;x++)
+            {
+                int a=cell.x+dx[x];
+                int b=cell.y+dy[x];
+                if(a>N || b>N || a<1 || b<1 || visited[a][b]!=0)
+                continue;
+                if(a==targetpos[0] && b==targetpos[1])
+                return visited[cell.x][cell.y];
+                
+                visited[a][b]=visited[cell.x][cell.y]+1;
+                q.add(new Cell(a,b));
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        return 0;
+        
+        
+    }
+}
+
+    
