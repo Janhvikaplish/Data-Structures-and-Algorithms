@@ -1,0 +1,31 @@
+class Solution {
+    static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+        // add your code here
+        Stack<Integer> st=new Stack<Integer>();
+        boolean visited[]=new boolean[V+1];
+        for(int i=0;i<V;i++)
+        {
+            if(visited[i]==false)
+            DFS(adj,i, visited, st);
+            
+        }
+        int a[]=new int[V+1];
+        int i=0;
+        while (st.empty() == false)
+            {
+                a[i]=st.pop();
+                i++;
+            }
+            return a;
+    }
+    static void DFS(ArrayList<ArrayList<Integer>> adj, int s, boolean[] visited, Stack<Integer> st)
+    {
+        visited[s]=true;
+        for(int v:adj.get(s))
+        {
+            if(visited[v]==false)
+            DFS(adj,v,visited,st);
+        }
+        st.push(s);
+    }
+}
