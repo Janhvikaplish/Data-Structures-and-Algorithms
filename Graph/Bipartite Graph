@@ -1,0 +1,63 @@
+class Solution
+{
+    public boolean isBipartite(int n, ArrayList<ArrayList<Integer>>arl)
+    {
+        // Code here
+        // int src=0; 
+          //red==0  blue==1 not colored==-1
+      int color[]=new int[n];
+      Arrays.fill(color,-1);
+      //mark src as red
+    //  color[src]=0;
+      
+      for(int i=0;i<n;i++)
+      {
+          if(color[i]== -1)
+          {
+              if(isBipartiteUtil(n,arl,color,i)==false ) return false;
+          }
+      }
+      return true;
+        
+    }
+    
+    public boolean isBipartiteUtil(int n, ArrayList<ArrayList<Integer>>arl,int color[],int src)
+    {
+        // Code here
+        
+      Queue<Integer> q=new LinkedList<Integer>();
+     // boolean flag=false;
+    
+      q.add(src);
+      color[src]=0;
+      while(!q.isEmpty())
+      {
+        int a=q.poll();
+        for(int x:arl.get(a))
+        {//marked with diff color
+          if(color[x]!=-1 && color[a]!=-1 && color[x]!=color[a])
+          {
+             continue;
+          }
+         
+          //marked with same color
+          if(color[x]!=-1 && color[a]!=-1 && color[x]==color[a])
+          {
+           // flag=false;
+            return false;
+          }
+          //notmarked--mark with opposite
+          if(color[x]==-1)
+          {
+            color[x]=(color[a]==0)?1:0;
+            q.add(x);
+             //flag=true;
+          }
+          
+        }
+      }
+      
+      return true;
+        
+    }
+}
