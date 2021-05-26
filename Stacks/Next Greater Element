@@ -1,0 +1,22 @@
+class Solution{
+    public static long[] nextLargerElement(long[] arr, int n) { 
+        // Your code here
+        Stack<Long> s=new Stack<Long>();
+        long[] a= new long[n];
+        s.push(arr[n-1]);
+        a[n-1]=-1;
+        int j=n-2;
+        for(int i=n-2;i>=0;i--)
+        {
+            
+            while(!s.isEmpty()&&s.peek()<=arr[i])
+            {
+                s.pop();
+            }
+            a[j]=(s.isEmpty())?(-1):(s.peek());
+            j--;
+            s.push(arr[i]);
+        }
+        return a;
+    } 
+}
