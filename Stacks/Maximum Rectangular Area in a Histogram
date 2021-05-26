@@ -1,0 +1,33 @@
+class Solution
+{
+    
+    // Function to calculate max rectangular area histogram
+    // hist[]: input array
+    // n: size of array
+    public static long getMaxArea(long a[], long n)  {
+        // your code here
+        Stack<Integer> s=new Stack<Integer>();
+        long res=0;
+        for(int i=0;i<n;i++)
+        {
+            while(!s.isEmpty()&& a[s.peek()]>=a[i])
+            {
+                int tp=s.pop();
+                long curr=a[tp]*(s.isEmpty()?i:(i-s.peek()-1));
+                res=Math.max(res,curr);
+            }
+            s.push(i);
+        }
+         while(!s.isEmpty())
+            {
+                int tp=s.pop();
+               long curr=a[tp]*(s.isEmpty()?n:(n-s.peek()-1));
+                res=Math.max(res,curr);
+            }
+            return res;
+    }
+        
+}
+
+
+
