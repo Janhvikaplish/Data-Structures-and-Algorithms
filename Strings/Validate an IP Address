@@ -1,0 +1,36 @@
+class Solution {
+
+    public boolean isValid(String s) {
+        // Write your code here
+        
+    int count=0,dotCount=0;
+	       for(int k=0;k<s.length();k++){
+	           if(s.charAt(k)=='.')
+	              dotCount++;
+	           if(k<s.length()-1 && s.charAt(k)=='.' && s.charAt(k+1)=='.')
+	              return false;
+	       }
+	       if(s.charAt(0)=='.')
+	         return false;
+	       if(dotCount!=3)
+	          return false;
+	       
+	       String[] ip =s.split("\\.");
+	       if(ip.length!=4)
+	         return false;
+	       
+	       for(int i=0;i<ip.length;i++){
+	            if((int)(ip[i].charAt(0))>=48 && (int)(ip[i].charAt(0))<=57){
+	                   if(ip[i].length()>1 && ip[i].charAt(0)=='0')
+	                       return false;
+	                   if(Integer.parseInt(ip[i])>255)
+	                       return false;
+	           }
+	           else{
+	              return false; 
+	           }
+	       }
+	       return true;
+	       
+	}
+}
