@@ -1,0 +1,29 @@
+class Solution
+{   static int pre=0;
+    public static Node buildTree(int inorder[], int preorder[], int n)
+    {
+        // code here 
+         pre=0;
+        return bTree( inorder, preorder, 0, n-1);
+    }
+     
+     public static Node bTree(int inorder[], int preorder[], int is, int ie)
+     {
+         if(is>ie)
+         return null;
+         Node root=new Node(preorder[pre++]);
+         int index=-1;
+         for(int i=is;i<=ie;i++)
+         {
+             if(inorder[i]==root.data)
+             {
+                 index=i;
+                 break;
+             }
+         }
+         root.left=bTree(inorder, preorder, is, index-1);
+         root.right=bTree(inorder, preorder, index+1, ie);
+         return root;
+     }
+}
+
