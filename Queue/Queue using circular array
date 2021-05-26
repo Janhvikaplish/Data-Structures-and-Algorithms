@@ -1,0 +1,78 @@
+class Queue
+{
+     int front, rear, size;
+     boolean isFull =false;
+    
+    private int []arr;
+    public Queue(int size)
+    {
+        this.size = size;
+        arr = new int[size];
+        front = 0;    
+        rear = 0;
+    }
+    
+    
+    // function to get size of queue
+     int getSize(){
+        return size;
+    }
+    
+    // Function to check if queue is empty or not
+     boolean isEmpty(){
+        if((front%size == rear%size) && !isFull)
+        return true;
+        
+        return false;
+    }
+    
+    // Function to get element at the top
+     int top()throws IllegalStateException{
+        if(isEmpty() == true)
+           throw new IllegalStateException ("");
+        else return arr[front];
+    }
+    
+    // Function to implement push operation in the queue
+    // element: element to be pushed into the queue
+    int push(int element){
+    
+    int size = getSize();
+    
+   if(isFull){
+        return -1;
+    }
+    
+    // do operation when queue is not full.
+    // Also, keep in mind of marking queue as 
+    // full when rear becomes equal to front
+    else{
+        
+        arr[rear] = element; // arr[rear] = element;
+        if((rear+1)%size == front%size) isFull = true;
+        rear = (rear+1)%size;
+    }
+    
+    
+    return 1;
+}
+
+// Function to pop elements from Queue
+int pop(){
+    
+    int size = getSize();
+    
+    if((isEmpty())){
+        return -1;
+    }
+    
+    // If queue is not empty, do the required operation.
+    // Also, keep in mind to unmark the flag which represents
+    // queue is full or not
+    else {
+        front = (front+1)%size;
+        isFull = false;
+    }
+    return 1;
+}
+}
