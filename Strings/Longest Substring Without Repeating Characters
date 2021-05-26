@@ -1,0 +1,36 @@
+class Solution
+{
+    
+
+    int SubsequenceLength(String s) 
+    {
+        // Code here  
+        char[] ch=s.toCharArray();
+        int[] count=new int[256];
+        int n=s.length();
+ 
+        // Initialize start of current window
+        if(n==0)
+        return 0;
+        int i = 0;
+        int ans=1,j=0;
+        // Move end of current window
+        count[ch[0]]++;
+        while(j!=n-1){
+            if(count[ch[j+1]]==0)
+            {
+                j++;
+                count[ch[j]]=1;
+                ans=Math.max(ans,j-i+1);
+            }
+            else{
+                count[ch[i]]--;
+                
+                i++;
+            }
+        }
+        return ans;
+    }
+    
+}
+
