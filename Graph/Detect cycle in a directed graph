@@ -1,0 +1,31 @@
+class Solution {
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
+        // code here
+        boolean visited[]=new boolean[V+1];
+        boolean recSt[]=new boolean[V+1];
+        for(int i=0;i<V;i++)
+        {
+            if(visited[i]==false)
+            {
+                if(DFSRec(adj,i,visited,recSt)==true)
+                return true;
+            }
+        
+        }
+        return false;
+    }
+    boolean DFSRec(ArrayList<ArrayList<Integer>> adj,int s, boolean[] visited, boolean[] recSt)
+    {
+        visited[s]=true;
+        recSt[s]=true;
+        for(int v:adj.get(s))
+        {
+            if(visited[v]==false&& DFSRec(adj,v,visited,recSt))
+            return true;
+            else if(recSt[v]==true)
+            return true;
+        }
+        recSt[s]=false;
+        return false;
+    }
+}
