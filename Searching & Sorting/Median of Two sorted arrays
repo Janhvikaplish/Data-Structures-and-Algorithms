@@ -1,0 +1,40 @@
+public static int findMedian(int arr[], int n, int brr[], int m){
+  //  if (arr.length > brr.length) {
+    //        return medianOfArrays(brr,n,arr, m);
+      //  }
+        int x = arr.length;
+        int y = brr.length;
+
+        int low = 0;
+        int high = x;
+        while (low <= high) {
+            int partitionX = (low + high)/2;
+            int partitionY = (x + y + 1)/2 - partitionX;
+
+            //if partitionX is 0 it means nothing is there on left side. Use -INF for maxLeftX
+            //if partitionX is length of input then there is nothing on right side. Use +INF for minRightX
+            int maxLeftX = (partitionX == 0) ? Integer.MIN_VALUE : arr[partitionX - 1];
+            int minRightX = (partitionX == x) ? Integer.MAX_VALUE :arr[partitionX];
+
+            int maxLeftY = (partitionY == 0) ? Integer.MIN_VALUE : brr[partitionY - 1];
+            int minRightY = (partitionY == y) ? Integer.MAX_VALUE : brr[partitionY];
+
+            if (maxLeftX <= minRightY && maxLeftY <= minRightX) {
+                //We have partitioned array at correct place
+                // Now get max of left elements and min of right elements to get the median in case of even length combined array size
+                // or get max of left for odd length combined array size.
+                if ((x + y) % 2 == 0) {
+                    return (Math.max(maxLeftX, maxLeftY) + Math.min(minRightX, minRightY))/2;
+                } else {
+                    return Math.max(maxLeftX, maxLeftY);
+                }
+            } else if (maxLeftX > minRightY) { //we are too far on right side for partitionX. Go on left side.
+                high = partitionX - 1;
+            } else { //we are too far on left side for partitionX. Go on right side.
+                low = partitionX + 1;
+            }
+        }
+        return 0;
+}
+
+      
