@@ -1,0 +1,16 @@
+class GfG{
+	public Stack<Integer> sort(Stack<Integer> s)
+	{
+		//add code here.
+		Stack<Integer> tmpStack = new Stack<Integer>();
+			while(!s.isEmpty()){
+			int lastElement = s.pop();
+			while(!tmpStack.isEmpty() && tmpStack.peek()>lastElement){
+				int tmpLastElement = tmpStack.pop();
+				s.push(tmpLastElement);
+			}
+			tmpStack.push(lastElement);
+			}
+			return tmpStack;
+	}
+}
