@@ -1,0 +1,13 @@
+class Sol
+{
+    public String multiplyStrings(String a,String b)
+    {
+        //code here.
+       java.math.BigInteger b1 = new BigInteger(a);
+java.math.BigInteger b2 = new BigInteger(b);
+java.math.BigInteger res = b1.multiply(b2);
+
+return res.toString();
+   
+    }
+}
